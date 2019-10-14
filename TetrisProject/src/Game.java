@@ -2,6 +2,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 
+// This is the testing sentece to git hub.// will be delited by Junsei.
+
 /**
  * Manages the game Tetris. Keeps track of the current piece and the grid.
  * Updates the display whenever the state of the game has changed.
