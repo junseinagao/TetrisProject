@@ -64,11 +64,23 @@ public class EventController extends KeyAdapter implements ActionListener {
 			case KeyEvent.VK_RIGHT:
 				handleMove(Direction.RIGHT);
 				break;
-			case KeyEvent.VK_UP: // Instant drop uppon Up key press
+			case KeyEvent.VK_UP: // Instant drop upon Up key press
 				if (game.getPiece() != null) {
 				game.getPiece().instantDrop(); // Uses Game getter method to access the active piece's instantDrop method
 				} 
 				break;
+				
+			case KeyEvent.VK_A: // Instant drop upon Up key press
+				if (game.getPiece() != null) {
+				game.getPiece().rotate(Direction.LEFT);; // Uses Game getter method to access the active piece's instantDrop method
+				}
+				break;
+			case KeyEvent.VK_D: // Instant drop upon Up key press
+				if (game.getPiece() != null) {
+				game.getPiece().rotate(Direction.RIGHT);; // Uses Game getter method to access the active piece's instantDrop method
+				}
+				break;
+
 
 			}
 		}
@@ -84,7 +96,7 @@ public class EventController extends KeyAdapter implements ActionListener {
 		 */
 		
 		if(game.getPiece() == null) { 
-			game.setPiece(new LShape(1, Grid.WIDTH / 2 - 1, game.getGrid())); // Makes a new piece 
+			game.setPiece(game.pieceSelection(Game.rand.nextInt(7))); // Makes a new piece 
 		}
 		else if (!game.getPiece().canMove(Direction.DOWN)) {
 			Point[] p = game.getPiece().getLocations();

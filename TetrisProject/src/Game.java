@@ -1,8 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.Random;
 
-
-// This is the testing sentece to git hub.// will be delited by Junsei.
 
 /**
  * Manages the game Tetris. Keeps track of the current piece and the grid.
@@ -16,9 +15,13 @@ public class Game {
 
 	private Tetris display; // the visual for the Tetris game
 
-	private LShape piece; // the current piece that is dropping
+	private Piece piece; // the current piece that is dropping
+	
+	
 
 	private boolean isOver; // has the game finished?
+	
+	public static Random rand = new Random();
 
 	/**
 	 * Creates a Tetris game
@@ -29,8 +32,30 @@ public class Game {
 	public Game(Tetris display) {
 		grid = new Grid();
 		this.display = display;
-		piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
+		piece = pieceSelection(rand.nextInt(7));
 		isOver = false;
+	}
+	
+	public Piece pieceSelection(int rdm) {
+		switch (rdm) {
+		case 0:
+			return new IShape(1, Grid.WIDTH / 2 - 1, grid);
+		case 1:
+			return new OShape(0, Grid.WIDTH / 2 - 1, grid);
+		case 2:
+			return new TShape(0, Grid.WIDTH / 2 - 1, grid);
+		case 3:
+			return new SShape(0, Grid.WIDTH / 2 - 1, grid);
+		case 4:
+			return new ZShape(0, Grid.WIDTH / 2 - 1, grid);
+		case 5:
+			return new LShape(1, Grid.WIDTH / 2 - 1, grid);
+		case 6:
+			return new JShape(1, Grid.WIDTH / 2 - 1, grid);
+		default:
+			return null;
+		}
+		
 	}
 
 	/**
@@ -92,13 +117,17 @@ public class Game {
 	/**
 	 * Setter and getter methods to transfer the updatePiece method to Event Controller
 	 */
-	public LShape getPiece() {
+	public Piece getPiece() {
 		return piece;
 	}
 	
-	public void setPiece(LShape p) {
+	public void setPiece(Piece p) {
 		this.piece = p;
 	}
+	
+	//public Piece[] getPieces() {
+		//return pieces;
+	//}
 	
 	public Grid getGrid() {
 		return grid;

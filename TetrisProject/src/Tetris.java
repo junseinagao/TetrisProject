@@ -1,11 +1,10 @@
 /**
+ * 
+ * We are in full compliance with the requirements of the assignment.
+
  * Create and control the game Tetris.
  * 
- * @CristianHabib CSC 143
- * @JunseiNagao CSC 143
- * @CarlosAlonsoGamboa CSC 143
- * 
- * We are in full compliance with the requirements of this assignment.
+ * @author CSC 143
  *
  */
 import java.awt.Color;
@@ -15,25 +14,16 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import java.io.File;
-import java.io.IOException;
 
-import javax.sound.sampled.*;
 
 public class Tetris extends JPanel {
 
 	private Game game;
-	private static Clip thisClip;
-	private static AudioInputStream audioInputStream;
-	private static String filePath;
 
 	/**
 	 * Sets up the parts for the Tetris game, display and user control
-	 * @throws LineUnavailableException 
-	 * @throws IOException 
-	 * @throws UnsupportedAudioFileException 
 	 */
-	public Tetris() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public Tetris() {
 		game = new Game(this);
 		JFrame f = new JFrame("The Tetris Game");
 		f.add(this);
@@ -43,9 +33,6 @@ public class Tetris extends JPanel {
 		EventController ec = new EventController(game);
 		f.addKeyListener(ec);
 		setBackground(Color.YELLOW);
-		
-		filePath = "Tetris Theme on KazooRecorder.wav";
-		setTunes();
 	}
 
 	/**
@@ -54,6 +41,7 @@ public class Tetris extends JPanel {
 	public void update() {
 		repaint();
 	}
+	
 
 	/**
 	 * Paint the current state of the game
@@ -72,26 +60,9 @@ public class Tetris extends JPanel {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				try {
-					new Tetris();
-				} catch (UnsupportedAudioFileException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (LineUnavailableException e) {
-					e.printStackTrace();
-				}
+				new Tetris();
 			}
 		});
-	}
-	
-	public static void setTunes() throws UnsupportedAudioFileException,IOException,LineUnavailableException {
-		audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
-		thisClip = AudioSystem.getClip();
-		thisClip.open(audioInputStream);
-		FloatControl gainControl = (FloatControl) thisClip.getControl(FloatControl.Type.MASTER_GAIN);
-		gainControl.setValue(-30.0f);
-		thisClip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 
 }

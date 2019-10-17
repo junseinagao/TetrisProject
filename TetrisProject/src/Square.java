@@ -70,6 +70,14 @@ public class Square {
 	public int getCol() {
 		return col;
 	}
+	
+	public void setRow(int r) {
+		this.row = r;
+	}
+	
+	public void setCol(int c) {
+		this.col = c;
+	}
 
 	/**
 	 * Returns true if this Square can move 1 spot in direction d
@@ -102,9 +110,16 @@ public class Square {
 			if (col == (Grid.WIDTH - 1) || grid.isSet(row, col + 1))
 				move = false;
 			break;
+			
+
+		case UP:
+			if (row == (0) || grid.isSet(row - 1, col))
+				move = false;
 		}
 		return move;
 	}
+	
+	
 
 	/**
 	 * moves this square in the given direction if possible.
@@ -129,6 +144,9 @@ public class Square {
 				break;
 			case RIGHT:
 				col = col + 1;
+				break;
+			case UP:
+				row = row - 1;
 				break;
 			}
 		}

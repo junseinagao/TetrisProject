@@ -58,7 +58,12 @@ public class Grid {
 	 *            the column in the grid
 	 */
 	public boolean isSet(int row, int col) {
-		return !board[row][col].getColor().equals(EMPTY);
+		try {
+			return !board[row][col].getColor().equals(EMPTY);
+		}
+		catch (ArrayIndexOutOfBoundsException e) {
+			return true;
+		}
 	}
 
 	/**
